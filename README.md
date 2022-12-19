@@ -1,12 +1,13 @@
 # watermelon-db-plugin 🍉
-Config plugin to auto configure `@nozbe/watermelondb`
+Patched config plugin to auto configure `@nozbe/watermelondb`
+
+Originally published by `morrowdigital` (https://github.com/morrowdigital/watermelondb-expo-plugin)
+
 
 ## Install
 
-> Tested against Expo SDK 43
-
 ```
-yarn add @morrowdigital/watermelondb-expo-plugin
+npm i @milvoj/watermelondb-expo-plugin
 ```
 
 After installing this npm package, add the [config plugin](https://docs.expo.io/guides/config-plugins/) to the [`plugins`](https://docs.expo.io/versions/latest/config/app/#plugins) array of your `app.json` or `app.config.js`. Then rebuild your app as described in the ["Adding custom native code"](https://docs.expo.io/workflow/customizing/) guide.
@@ -17,6 +18,6 @@ In your app.json `plugins` array:
 
 ```json
 {
-  "plugins": ["@morrowdigital/watermelondb-expo-plugin"]
+  "plugins": ["@milvoj/watermelondb-expo-plugin"]
 }
 ```
