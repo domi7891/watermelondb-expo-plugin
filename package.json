@@ -1,13 +1,13 @@
 {
-  "name": "@morrowdigital/watermelondb-expo-plugin",
-  "version": "1.0.0",
+  "name": "@milvoj/watermelondb-expo-plugin",
+  "version": "1.0.1",
   "main": "build/withWatermelon.js",
   "types": "build/withWatermelon.d.ts",
   "license": "MIT",
-  "git": "https://github.com/morrowdigital/watermelondb-expo-plugin.git",
-  "homepage": "https://github.com/morrowdigital/watermelondb-expo-plugin#readme",
+  "git": "https://github.com/milvoj/watermelondb-expo-plugin.git",
+  "homepage": "https://github.com/milvoj/watermelondb-expo-plugin#readme",
   "bugs": {
-    "url": "https://github.com/morrowdigital/watermelondb-expo-plugin/issues"
+    "url": "https://github.com/milvoj/watermelondb-expo-plugin/issues"
   },
   "keywords": [
     "watermelondb",
@@ -33,13 +33,13 @@
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module"
   },
-  "description": "Config plugin to auto configure `@nozbe/watermelondb`",
+  "description": "Patched config plugin to auto configure `@nozbe/watermelondb`. Fork from https://github.com/morrowdigital/watermelondb-expo-plugin.",
   "directories": {
     "example": "example"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/morrowdigital/watermelondb-expo-plugin.git"
+    "url": "git+https://github.com/milvoj/watermelondb-expo-plugin.git"
   },
-  "author": "Morrow"
+  "author": "milvoj"
 }

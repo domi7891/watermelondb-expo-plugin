@@ -143,15 +143,16 @@ const withCocoaPods = (config: ExportedConfigWithProps) => {
         config.modRequest.projectRoot
       );
 
-      if (watermelonPath) {
-        await fs.writeFile(
-          filePath,
-          `
+      // patch pods before 'post_install' instruction in Podfile
+      const patchKey = "post_install";
+      const slicedContent = contents.split(patchKey);
+      slicedContent[0] += `\n
 pod 'WatermelonDB', :path => '../node_modules/@nozbe/watermelondb'
 pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi', :modular_headers => true
-pod 'simdjson', path: '../node_modules/@nozbe/simdjson'\n
-                ` + contents
-        );
+pod 'simdjson', path: '../node_modules/@nozbe/simdjson'\n\n`;
+
+      if (watermelonPath) {
+        await fs.writeFile(filePath, slicedContent.join(patchKey));
       } else {
         throw new Error("Please make sure you have watermelondb installed");
       }
