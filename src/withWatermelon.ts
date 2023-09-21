@@ -22,7 +22,7 @@ function setAppBuildGradle(config: ExportedConfigWithProps) {
       // @ts-ignore
       /dependencies\s{/,
       `dependencies {
-\timplementation project(':watermelondb')`
+\timplementation project(':watermelondb-jsi')`
     );
 
     return config;
@@ -34,8 +34,8 @@ function setAppSettingBuildGradle(config: ExportedConfigWithProps) {
     config.modResults.contents = config.modResults.contents.replace(
       `include ':app'`,
       `
-include ':watermelondb'
-project(':watermelondb').projectDir =new File(rootProject.projectDir, '../node_modules/@nozbe/watermelondb/native/android')
+include ':watermelondb-jsi'
+project(':watermelondb-jsi').projectDir =new File(rootProject.projectDir, '../node_modules/@nozbe/watermelondb/native/android-jsi')
             
 include ':app'
             `
@@ -58,9 +58,16 @@ function setAndroidMainApplication(config: ExportedConfigWithProps) {
       const contents = await fs.readFile(filePath, "utf-8");
 
       let updated = insertLinesHelper(
-        "import com.nozbe.watermelondb.WatermelonDBPackage;",
+        "import com.nozbe.watermelondb.WatermelonDBPackage;\nimport com.facebook.react.bridge.JSIModulePackage;",
         "import java.util.List;",
         contents
+      );
+
+      updated = insertLinesHelper(
+        "      @Override\n      protected JSIModulePackage getJSIModulePackage() {\n         return new WatermelonDBJSIPackage();\n      }\n",
+        "      protected String getJSMainModuleName() {",
+        updated,
+        -1
       );
 
       await fs.writeFile(filePath, updated);

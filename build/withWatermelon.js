@@ -17,15 +17,15 @@ function setAppBuildGradle(config) {
         config.modResults.contents = replace(config.modResults.contents, 
         // @ts-ignore
         /dependencies\s{/, `dependencies {
-\timplementation project(':watermelondb')`);
+\timplementation project(':watermelondb-jsi')`);
         return config;
     });
 }
 function setAppSettingBuildGradle(config) {
     return (0, config_plugins_1.withSettingsGradle)(config, (config) => {
         config.modResults.contents = config.modResults.contents.replace(`include ':app'`, `
-include ':watermelondb'
-project(':watermelondb').projectDir =new File(rootProject.projectDir, '../node_modules/@nozbe/watermelondb/native/android')
+include ':watermelondb-jsi'
+project(':watermelondb-jsi').projectDir =new File(rootProject.projectDir, '../node_modules/@nozbe/watermelondb/native/android-jsi')
             
 include ':app'
             `);
@@ -40,7 +40,8 @@ function setAndroidMainApplication(config) {
             const root = config.modRequest.platformProjectRoot;
             const filePath = `${root}/app/src/main/java/${(_b = (_a = config === null || config === void 0 ? void 0 : config.android) === null || _a === void 0 ? void 0 : _a.package) === null || _b === void 0 ? void 0 : _b.replace(/\./g, "/")}/MainApplication.java`;
             const contents = await fs.readFile(filePath, "utf-8");
-            let updated = (0, insertLinesHelper_1.insertLinesHelper)("import com.nozbe.watermelondb.WatermelonDBPackage;", "import java.util.List;", contents);
+            let updated = (0, insertLinesHelper_1.insertLinesHelper)("import com.nozbe.watermelondb.WatermelonDBPackage;\nimport com.facebook.react.bridge.JSIModulePackage;", "import java.util.List;", contents);
+            updated = (0, insertLinesHelper_1.insertLinesHelper)("      @Override\n      protected JSIModulePackage getJSIModulePackage() {\n         return new WatermelonDBJSIPackage();\n      }\n", "      protected String getJSMainModuleName() {", updated, -1);
             await fs.writeFile(filePath, updated);
             return config;
         },
