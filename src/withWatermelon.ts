@@ -58,7 +58,7 @@ function setAndroidMainApplication(config: ExportedConfigWithProps) {
       const contents = await fs.readFile(filePath, "utf-8");
 
       let updated = insertLinesHelper(
-        "import com.nozbe.watermelondb.WatermelonDBJSIPackage;\nimport com.facebook.react.bridge.JSIModulePackage;",
+        "import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage;\nimport com.facebook.react.bridge.JSIModulePackage;",
         "import java.util.List;",
         contents
       );

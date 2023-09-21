@@ -40,7 +40,7 @@ function setAndroidMainApplication(config) {
             const root = config.modRequest.platformProjectRoot;
             const filePath = `${root}/app/src/main/java/${(_b = (_a = config === null || config === void 0 ? void 0 : config.android) === null || _a === void 0 ? void 0 : _a.package) === null || _b === void 0 ? void 0 : _b.replace(/\./g, "/")}/MainApplication.java`;
             const contents = await fs.readFile(filePath, "utf-8");
-            let updated = (0, insertLinesHelper_1.insertLinesHelper)("import com.nozbe.watermelondb.WatermelonDBPackage;\nimport com.facebook.react.bridge.JSIModulePackage;", "import java.util.List;", contents);
+            let updated = (0, insertLinesHelper_1.insertLinesHelper)("import com.nozbe.watermelondb.jsi.WatermelonDBJSIPackage;\nimport com.facebook.react.bridge.JSIModulePackage;", "import java.util.List;", contents);
             updated = (0, insertLinesHelper_1.insertLinesHelper)("      @Override\n      protected JSIModulePackage getJSIModulePackage() {\n         return new WatermelonDBJSIPackage();\n      }\n", "      protected String getJSMainModuleName() {", updated, -1);
             await fs.writeFile(filePath, updated);
             return config;
