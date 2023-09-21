@@ -18,6 +18,6 @@ In your app.json `plugins` array:
 
 ```json
 {
-  "plugins": ["@domi7891/watermelondb-expo-plugin-jsi"]
+  "plugins": ["@domi7891/watermelondb-expo-plugin"]
 }
 ```
